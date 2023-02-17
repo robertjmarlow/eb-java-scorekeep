@@ -1,20 +1,12 @@
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE")
-        classpath("io.spring.gradle:dependency-management-plugin:0.5.4.RELEASE")
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0'
-    }
+plugins {
+    id 'org.springframework.boot' version '2.7.8'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'org.junit.platform.gradle.plugin'
 
 jar {
     baseName = 'scorekeep-api'
@@ -29,16 +21,16 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web")
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    compile("com.amazonaws:aws-java-sdk-dynamodb")
-    compile("com.amazonaws:aws-java-sdk-sns")
-    compile("com.amazonaws:aws-xray-recorder-sdk-core")
-    compile("com.amazonaws:aws-xray-recorder-sdk-aws-sdk")
-    compile("com.amazonaws:aws-xray-recorder-sdk-aws-sdk-instrumentor")
-    compile("com.fasterxml.jackson.core:jackson-databind:2.8.11")
-    testCompile("org.junit.jupiter:junit-jupiter-api:5.0.3")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.0.3")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("com.amazonaws:aws-java-sdk-dynamodb")
+    implementation("com.amazonaws:aws-java-sdk-sns")
+    implementation("com.amazonaws:aws-xray-recorder-sdk-core")
+    implementation("com.amazonaws:aws-xray-recorder-sdk-aws-sdk")
+    implementation("com.amazonaws:aws-xray-recorder-sdk-aws-sdk-instrumentor")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 }
 
 dependencyManagement {
@@ -46,7 +38,4 @@ dependencyManagement {
         mavenBom("com.amazonaws:aws-java-sdk-bom:1.11.761")
         mavenBom('com.amazonaws:aws-xray-recorder-sdk-bom:2.11.0')
     }
-}
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.3'
 }
