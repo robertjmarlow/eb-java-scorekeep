@@ -9,8 +9,8 @@ apply plugin: 'idea'
 apply plugin: 'io.spring.dependency-management'
 
 jar {
-    baseName = 'scorekeep-api'
-    version =  '1.0.0'
+    project.archivesBaseName = 'scorekeep-api'
+    project.version =  '1.0.0'
 }
 
 repositories {
